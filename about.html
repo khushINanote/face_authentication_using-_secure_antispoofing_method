@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Anti-Spoofing System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to bottom right, #010d1f, #0a1a33);
+      color: white;
+      line-height: 2;
+      font-size: 22px;
+      overflow-x: hidden;
+      padding-top: 100px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #07172d;
+      padding: 30px 100px;
+      height: 100px;
+    }
+
+    .logo {
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: #00b7ff;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 50px;
+    }
+
+    .nav-links a {
+      color: #ffffffb3;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.4rem;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #00b7ff;
+    }
+
+    .auth-buttons button {
+      margin-left: 20px;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+
+    .login-btn {
+      background: transparent;
+      border: 1px solid #00b7ff;
+      color: #00b7ff;
+    }
+
+    .signup-btn {
+      background: #00b7ff;
+      color: #fff;
+    }
+
+    .about-section {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 60px 100px;
+      gap: 80px;
+      min-height: calc(100vh - 100px);
+    }
+
+    .about-content {
+      flex: 1;
+      max-width: 800px;
+    }
+
+    .about-content h1 {
+      font-size: 4.2rem;
+      margin-bottom: 40px;
+      text-shadow: 0 0 20px rgba(0, 183, 255, 0.7);
+    }
+
+    .about-content p {
+      color: #c9d3e3;
+      margin-bottom: 35px;
+      font-size: 1.5rem;
+    }
+
+    .stats {
+      display: flex;
+      gap: 60px;
+      margin-top: 60px;
+    }
+
+    .stat-box {
+      background: rgba(0, 183, 255, 0.1);
+      border: 2px solid rgba(0, 183, 255, 0.5);
+      border-radius: 50%;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(0, 183, 255, 0.6);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-box:hover {
+      transform: scale(1.08);
+    }
+
+    .stat-box h2 {
+      color: #00b7ff;
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+    }
+
+    .stat-box p {
+      color: #c9d3e3;
+      font-size: 1.3rem;
+    }
+
+    .about-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .about-image img {
+      width: 800px;
+      height: auto;
+      max-width: 100%;
+      border-radius: 12px;
+      filter: drop-shadow(0 0 80px rgba(0, 183, 255, 0.8));
+      object-fit: contain;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        font-size: 18px;
+        padding-top: 100px;
+      }
+
+      .about-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 30px;
+      }
+
+      .about-content h1 {
+        font-size: 3rem;
+      }
+
+      .about-content p {
+        font-size: 1.2rem;
+      }
+
+      .stats {
+        justify-content: center;
+      }
+
+      .about-image {
+        margin-top: 40px;
+      }
+
+      .about-image img {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">Anti-Spoofing System</div>
+    <nav>
+      <ul class="nav-links">
+  <li><a href="{{ url_for('home') }}">Home</a></li>
+  <li><a href="{{ url_for('about') }}">About</a></li>
+  <li><a href="{{ url_for('features') }}">Features</a></li>
+  <li><a href="{{ url_for('contact') }}" class="active">Contact</a></li>
+</ul>
+    </nav>
+    <div class="auth-buttons">
+      <button class="login-btn">Log In</button>
+      <button class="signup-btn">Sign Up</button>
+    </div>
+  </header>
+
+  <section class="about-section">
+    <div class="about-content">
+      <h1>
+        <span style="color: #ffffff;">About Our</span>
+        <span style="color: #00b7ff;"> System</span>
+      </h1>
+      <p>
+        In a world where digital identities are constantly at risk, verifying whether a face is real or spoofed has become essential. Our integrated  Anti-Spoofing System ensures the authenticity of every facial interaction by detecting fake, replayed, or deepfake inputs with precision.
+      </p>
+      <p>
+       We combine deep learning models powered by MobileNetV3, ResNet50, and custom CNN architectures trained to differentiate between real and spoofed faces across images, videos, and live webcam feeds. This multi-model integration allows real-time verification, even under challenging conditions.Our mission is to build a secure and reliable face verification system that stops fake or replayed identities in real time.
+      </p>
+     
+
+      
+    </div>
+
+    <div class="about-image">
+      <img src="{{ url_for('static', filename='images/about.jpg') }}" alt="AI Security Illustration" />
+    </div>
+  </section>
+</body>
+</html>

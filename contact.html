@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Anti-Spoofing System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(145deg, #04132a, #09214b);
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #07172d;
+      padding: 30px 100px;
+      height: 100px;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #00b7ff;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 35px;
+    }
+
+    .nav-links a {
+      color: #ffffffb3;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.2rem;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #00b7ff;
+    }
+
+    .auth-buttons button {
+      margin-left: 15px;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .login-btn {
+      background: transparent;
+      border: 1px solid #00b7ff;
+      color: #00b7ff;
+    }
+
+    .signup-btn {
+      background: #00b7ff;
+      color: #fff;
+    }
+
+    .contact-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 30px;
+      min-height: calc(100vh - 100px);
+    }
+
+    .form-card {
+      background-color: #081a33;
+      padding: 60px 80px;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0, 183, 255, 0.15);
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .form-card h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(to right, #00b7ff, #00ff99);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-card p {
+      font-size: 1.3rem;
+      color: #c0c9d6;
+      margin-bottom: 40px;
+    }
+
+    .contact-form label {
+      font-size: 1.2rem;
+      color: #d6e1f3;
+      margin-bottom: 10px;
+      display: block;
+      text-align: left;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      background-color: #0c1f3c;
+      border: none;
+      outline: none;
+      color: white;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+    }
+
+    .contact-form textarea {
+      height: 160px;
+      resize: none;
+    }
+
+    .contact-form button {
+      width: 100%;
+      background-color: #00b7ff;
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      padding: 18px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #00a2e6;
+      transform: scale(1.02);
+    }
+
+    .flash {
+      margin-bottom: 20px;
+      padding: 12px;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 500;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .flash.success { background-color: #00b894; color: #fff; }
+    .flash.error { background-color: #d63031; color: #fff; }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">Anti-Spoofing System</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('features') }}">Features</a></li>
+        <li><a href="{{ url_for('contact') }}" class="active">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <button class="login-btn">Login</button>
+      <button class="signup-btn">Sign Up</button>
+    </div>
+  </header>
+
+  <section class="contact-section">
+    <div class="form-card">
+      <h1>Get in <span>Touch</span></h1>
+      <p>Have questions? We'd love to hear from you.</p>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form class="contact-form" action="{{ url_for('contact') }}" method="POST">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" placeholder="Your name" required />
+
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="your.email@example.com" required />
+
+        <label for="message">Message</label>
+        <textarea name="message" id="message" placeholder="Your message..." required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    setTimeout(() => {
+      document.querySelectorAll('.flash').forEach(el => {
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 500);
+      });
+    }, 4000);
+  </script>
+</body>
+</html>

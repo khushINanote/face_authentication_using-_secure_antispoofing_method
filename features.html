@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features | Anti-Spoofing System</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top left, #0a1a33, #021026);
+      color: white;
+      line-height: 1.6;
+      font-size: 18px;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #07172d;
+      padding: 30px 100px;
+      height: 100px;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #00b7ff;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 35px;
+    }
+
+    .nav-links a {
+      color: #ffffffb3;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.2rem;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #00b7ff;
+    }
+
+    .auth-buttons button {
+      margin-left: 15px;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .login-btn {
+      background: transparent;
+      border: 1px solid #00b7ff;
+      color: #00b7ff;
+    }
+
+    .signup-btn {
+      background: #00b7ff;
+      color: #fff;
+    }
+
+    .features-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 100px 80px;
+      max-width: 1600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .features-section h1 {
+      font-size: 5.5rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .features-section h1 span {
+      background: linear-gradient(to right, #00b7ff, #00ff99);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .features-section p {
+      color: #c9d3e3;
+      margin-top: 20px;
+      font-size: 1.6rem;
+      max-width: 1000px;
+    }
+
+    .feature-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 80px;
+      margin-top: 100px;
+      justify-content: center;
+      width: 100%;
+      max-width: 1800px;
+    }
+
+    .card {
+      width: 420px;
+      height: 480px;
+      background: rgba(0, 183, 255, 0.05);
+      border: 1px solid rgba(0, 183, 255, 0.2);
+      border-radius: 12px;
+      padding: 40px 35px;
+      text-align: left;
+      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(0, 183, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(0, 183, 255, 0.4);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      color: #00b7ff;
+      margin-bottom: 25px;
+    }
+
+    .card h3 {
+      color: #ffffff;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .card p {
+      color: #c9d3e3;
+      font-size: 1.4rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1200px) {
+      .feature-cards {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .features-section h1 {
+        font-size: 4rem;
+      }
+
+      .features-section p {
+        font-size: 1.3rem;
+      }
+
+      .card {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .features-section {
+        padding: 100px 30px 60px;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .auth-buttons {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Anti-Spoofing System</div>
+    <nav>
+      <ul class="nav-links">
+  <li><a href="{{ url_for('home') }}">Home</a></li>
+  <li><a href="{{ url_for('about') }}">About</a></li>
+  <li><a href="{{ url_for('features') }}">Features</a></li>
+  <li><a href="{{ url_for('contact') }}" class="active">Contact</a></li>
+</ul>
+    </nav>
+    <div class="auth-buttons">
+      <button class="login-btn">Login</button>
+      <button class="signup-btn">Sign Up</button>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <h1>Powerful <span>Features</span></h1>
+    <p>
+      Comprehensive spoof detection across image, video, and live input.
+    </p>
+
+    <div class="feature-cards">
+      <div class="card">
+        <div>
+          <div class="card-icon">📷</div>
+          <h3>Image Spoof Detection</h3>
+          <p>
+           Identifies fake images such as printed photos, digital screens, or manipulated faces using texture and lighting inconsistencies.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-icon">🎥</div>
+          <h3>Video Spoof Detection</h3>
+          <p>
+            Detects whether a video is real or spoofed using motion patterns and visual cues to ensure genuine face authentication.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-icon">🧠</div>
+          <h3>Real-time Webcam Analysis</h3>
+          <p>
+            Analyzes real-time webcam feed for facial recognition and liveness. Determines if the feed is live, authentic, and physically present.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-icon">🔒</div>
+          <h3>Secure Models</h3>
+          <p>
+           Combines deep learning and vision-based models to provide fast, accurate, and secure liveness verification.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

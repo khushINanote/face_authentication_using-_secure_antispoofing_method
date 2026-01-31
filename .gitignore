@@ -1,0 +1,22 @@
+# ML models and datasets
+*.h5
+*.pt
+*.pth
+dataset/
+data/
+videos/
+
+# Python
+venv/
+__pycache__/
+
+# Node
+node_modules/
+
+# Secrets
+.env
+.env.local
+
+# Build folders
+dist/
+build/

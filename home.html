@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anti-Spoofing System | Home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top left, #0a1a33, #021026);
+      color: white;
+      line-height: 1.6;
+      font-size: 18px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #07172d;
+      padding: 30px 100px;
+      height: 100px;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #00b7ff;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 35px;
+    }
+
+    .nav-links a {
+      color: #ffffffb3;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.2rem;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #00b7ff;
+    }
+
+    .auth-buttons button {
+      margin-left: 15px;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .login-btn {
+      background: transparent;
+      border: 1px solid #00b7ff;
+      color: #00b7ff;
+    }
+
+    .signup-btn {
+      background: #00b7ff;
+      color: #fff;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 40px;
+      background: url('{{ url_for("static", filename="images/home.jpg") }}') no-repeat center/cover;
+      background-blend-mode: overlay;
+      background-color: rgba(2, 16, 38, 0.85);
+      height: 100vh;
+    }
+
+    .hero h1 {
+      font-size: 4.6rem;
+      font-weight: 700;
+      max-width: 1400px;
+      width: 100%;
+      line-height: 1.3;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .hero h1 .white { color: #ffffff; }
+    .hero h1 .blue { color: #00b7ff; }
+    .hero h1 .gradient {
+      background: linear-gradient(to right, #00b7ff, #00ff99);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: #c9d3e3;
+      font-size: 1.4rem;
+      margin-top: 25px;
+      max-width: 800px;
+    }
+
+    .hero-buttons {
+      margin-top: 45px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .btn {
+      padding: 14px 34px;
+      border-radius: 30px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: 0.3s ease;
+      box-shadow: 0 0 12px rgba(0, 183, 255, 0.3);
+    }
+
+    .btn-primary {
+      background: #00b7ff;
+      color: #fff;
+      border: 1px solid #00b7ff;
+    }
+
+    .btn-primary:hover {
+      background: #009ee0;
+      box-shadow: 0 0 20px rgba(0, 183, 255, 0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+    }
+
+    .btn-secondary:hover {
+      background: #00b7ff;
+      color: #fff;
+      border-color: #00b7ff;
+      box-shadow: 0 0 20px rgba(0, 183, 255, 0.5);
+    }
+
+    .features-tags {
+      margin-top: 50px;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+
+    .features-tags span {
+      color: #00b7ff;
+    }
+
+    .features-tags span::before {
+      content: "• ";
+      color: #00b7ff;
+    }
+
+    @media (max-width: 900px) {
+      .hero h1 {
+        font-size: 2.8rem;
+        max-width: 90%;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .auth-buttons {
+        margin-top: 10px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      body { font-size: 20px; }
+      .hero h1 { font-size: 5rem; }
+      .hero p { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Anti-Spoofing System</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('features') }}">Features</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <button class="login-btn" onclick="window.location.href='{{ url_for('login') }}'">Log In</button>
+      <button class="signup-btn" onclick="window.location.href='{{ url_for('signup') }}'">Sign Up</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>
+      <span class="white">Face Authentication</span><br />
+      <span class="white">using</span>
+      <span class="blue"> Hybrid</span><br />
+      <span class="gradient">Anti-Spoofing Method</span>
+    </h1>
+    <p>Your face, your identity — verified across every mode</p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary" onclick="window.location.href='{{ url_for('login') }}'">Get Started</button>
+      <button class="btn btn-secondary" onclick="window.location.href='{{ url_for('about') }}'">Learn More</button>
+    </div>
+    <div class="features-tags">
+      <span>Real-time Detection</span>
+      <span>Multi-Modal Verification</span>
+      <span>Secure</span>
+    </div>
+  </section>
+</body>
+</html>
