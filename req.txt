@@ -1,3 +1,9 @@
 opencv-python>=4.8.0
 tensorflow==2.13.0
 
+streamlit
+tensorflow
+opencv-python-headless
+pillow
+numpy
+gdown
