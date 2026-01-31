@@ -4,5 +4,6 @@ torchvision==0.25.0
 numpy==2.4.1
 pillow==12.1.0
 streamlit==1.53.1
-# Remove any existing opencv-python
 opencv-python-headless==4.13.0.90
+pymongo==4.3.3
+gdown==4.7.1
