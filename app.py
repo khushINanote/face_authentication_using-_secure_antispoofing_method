@@ -1,4 +1,5 @@
 import os
+os.environ["OPENCV_OPENGL_SUPPORT"] = "0"
 import time
 import cv2
 import numpy as np
@@ -222,4 +223,5 @@ def webcam():
 
 # ---------------- Run App ----------------
 if __name__ == '__main__':
+
     app.run(host='127.0.0.1', port=5001, debug=True)
