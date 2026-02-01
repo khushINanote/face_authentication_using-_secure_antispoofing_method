@@ -1,7 +1,12 @@
-streamlit
+
+Flask==3.0.0
+pymongo
 tensorflow==2.15.0
 opencv-python-headless
 numpy
 pillow
-pymongo
+werkzeug
+gunicorn
+
+
 
