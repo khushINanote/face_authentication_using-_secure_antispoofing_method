@@ -1,19 +1,19 @@
 
-#  * README  DOCUMENT **
+#   README  DOCUMENT 
 
 ### **Hybrid Face Anti-Spoofing System – Execution Guide**
 
 ---
 
-## **1. Introduction**
+## 1. Introduction
 
 This document explains how to install, configure, and execute the Hybrid Face Anti-Spoofing System. The system detects **Real / Spoof / DeepFake** inputs using **image, video, and webcam** data.
 
 ---
 
-## **2. System Requirements**
+## 2. System Requirements
 
-### **Hardware Requirements**
+### Hardware Requirements
 
 | Component | Specification           |
 | --------- | ----------------------- |
@@ -24,7 +24,7 @@ This document explains how to install, configure, and execute the Hybrid Face An
 
 ---
 
-### **Software Requirements**
+### Software Requirements
 
 | Software   | Version           |
 | ---------- | ----------------- |
@@ -37,7 +37,7 @@ This document explains how to install, configure, and execute the Hybrid Face An
 
 ---
 
-## **3. Project Structure**
+## 3. Project Structure
 
 ```
 project/
@@ -54,9 +54,9 @@ project/
 
 ---
 
-## **4. Installation Instructions**
+## 4. Installation Instructions
 
-### **Step 1 — Create Virtual Environment**
+### Step 1 — Create Virtual Environment
 
 #### Windows
 
@@ -67,7 +67,7 @@ venv_spoof\Scripts\activate
 
 ---
 
-### **Step 2 — Install Dependencies**
+### Step 2 — Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -81,9 +81,9 @@ pip install flask tensorflow keras opencv-python pymongo numpy pillow
 
 ---
 
-## **5. Configure MongoDB**
+## 5. Configure MongoDB
 
-### **Step 3 — Start MongoDB**
+### Step 3 — Start MongoDB
 
 Run:
 
@@ -93,8 +93,8 @@ mongod
 
 Your project automatically creates:
 
-**Database:** `antispoofing_db`
-**Collections:**
+Database: `antispoofing_db`
+Collections:
 
 * `users`
 * `contact_messages`
@@ -104,9 +104,9 @@ Your project automatically creates:
 
 ---
 
-## **6. Running the Application**
+## 6. Running the Application
 
-### **Step 4 — Start Flask Server**
+### Step 4 — Start Flask Server
 
 ```bash
 python app.py
@@ -243,5 +243,6 @@ mongod
 This document provides complete execution instructions for running the Hybrid Face Anti-Spoofing System. The application integrates Flask, TensorFlow, OpenCV, and MongoDB to deliver reliable real-time authentication.
 
 ---
+
 
 
