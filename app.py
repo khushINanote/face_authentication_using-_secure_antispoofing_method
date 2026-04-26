@@ -23,7 +23,8 @@ app.config['UPLOAD_FOLDER'] = 'static/uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # ---------------- MongoDB Setup ----------------
-client = MongoClient("mongodb://localhost:27017/")
+mongo_uri = os.environ.get("MONGO_URI", "mongodb://localhost:27017/")
+client = MongoClient(mongo_uri)
 db = client["antispoofing_db"]
 users_collection = db["users"]
 contact_collection = db["contact_messages"]
@@ -224,4 +225,5 @@ def webcam():
 # ---------------- Run App ----------------
 if __name__ == '__main__':
 
-    app.run(host='127.0.0.1', port=5001, debug=True)
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host='0.0.0.0', port=port)

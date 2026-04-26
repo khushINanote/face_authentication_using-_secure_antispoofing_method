@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}System Features | SpoofGuard{% endblock %}
+
+{% block content %}
+<div class="container py-5 animate-fade">
+    <div class="text-center mb-5">
+        <h2 class="hero-title" style="font-size: 3.5rem;">Advanced Capabilities</h2>
+        <p class="text-dim fs-5">Comprehensive protection across all biometric attack vectors.</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="glass-panel p-4 h-100">
+                <i class="fas fa-print fa-2x mb-3 text-primary-glow" style="color: var(--primary-glow)"></i>
+                <h4>Print Attack Detection</h4>
+                <p class="text-dim">Identifies high-resolution photo printouts by analyzing micro-texture and light reflection patterns.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="glass-panel p-4 h-100">
+                <i class="fas fa-desktop fa-2x mb-3 text-primary-glow" style="color: var(--primary-glow)"></i>
+                <h4>Screen Replay Analysis</h4>
+                <p class="text-dim">Detects moiré patterns and screen refresh rates that occur when a face is presented via a digital display.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="glass-panel p-4 h-100">
+                <i class="fas fa-mask fa-2x mb-3 text-primary-glow" style="color: var(--primary-glow)"></i>
+                <h4>DeepFake Filtering</h4>
+                <p class="text-dim">Our neural network identifies synthetic artifacts and unnatural facial movements indicative of AI-generated faces.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

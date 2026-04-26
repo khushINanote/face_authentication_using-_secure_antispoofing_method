@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Login | SpoofGuard{% endblock %}
+
+{% block extra_css %}
+<style>
+    .auth-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .auth-card {
+        width: 100%;
+        max-width: 450px;
+        padding: 3rem;
+        text-align: center;
+    }
+
+    .form-label {
+        color: var(--text-dim);
+        text-align: left;
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        color: white;
+        padding: 0.8rem 1.2rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--primary-glow);
+        box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+        color: white;
+    }
+
+    .auth-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .auth-subtitle {
+        color: var(--text-dim);
+        margin-bottom: 2.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="glass-panel auth-card animate-fade">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-subtitle">Verify your identity to continue</p>
+        
+        <form action="{{ url_for('login') }}" method="POST">
+            <div class="mb-1 text-start">
+                <label class="form-label">Email Address</label>
+                <input type="email" name="email" class="form-control" placeholder="name@company.com" required>
+            </div>
+            <div class="mb-1 text-start">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            
+            <button type="submit" class="btn btn-premium w-100 mb-3 py-3">Login</button>
+            
+            <p class="text-dim small">
+                Don't have an account? <a href="{{ url_for('signup') }}" class="text-primary-glow text-decoration-none" style="color: var(--primary-glow)">Create one</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

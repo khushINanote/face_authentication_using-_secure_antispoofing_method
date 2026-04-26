@@ -238,9 +238,30 @@ mongod
 
 ---
 
-# **11. Conclusion**
+---
 
-This document provides complete execution instructions for running the Hybrid Face Anti-Spoofing System. The application integrates Flask, TensorFlow, OpenCV, and MongoDB to deliver reliable real-time authentication.
+# **13. Deploying on Render**
+
+This project is optimized for [Render](https://render.com) using Docker.
+
+### **Steps to Deploy**
+
+1. **Push this repository** to your GitHub/GitLab account.
+2. **Create a New Web Service** on Render.
+3. **Connect your repository**.
+4. **Environment Configuration**:
+   - Render will automatically detect the `Dockerfile`.
+   - Add the following **Environment Variables** in the Render dashboard:
+     - `MONGO_URI`: Your MongoDB Atlas connection string.
+     - `SECRET_KEY`: A random secure string.
+     - `PORT`: `5001` (Render will also provide this automatically).
+5. **Storage (Optional)**:
+   - If you want to keep uploaded files permanently, attach a **Persistent Disk** to `/app/static/uploads` in the Render settings (Requires a paid plan).
+
+### **Database Recommendation**
+Since Render doesn't host MongoDB, we recommend using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) (Free Tier available).
+
+---
 
 ---
 

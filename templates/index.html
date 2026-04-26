@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | SpoofGuard{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dashboard-header {
+        padding: 4rem 0 2.5rem;
+    }
+
+    .card-detection {
+        height: 100%;
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+    }
+
+    .card-detection:hover {
+        border-color: var(--primary-glow);
+        transform: translateY(-5px);
+    }
+
+    .icon-box {
+        width: 60px;
+        height: 60px;
+        background: rgba(0, 242, 255, 0.1);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--primary-glow);
+        margin-bottom: 1.5rem;
+    }
+
+    .upload-zone {
+        border: 2px dashed var(--glass-border);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .upload-zone:hover {
+        border-color: var(--primary-glow);
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .result-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 99px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+
+    .badge-real { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+    .badge-spoof { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+    .preview-img {
+        width: 100%;
+        border-radius: 12px;
+        margin-top: 1rem;
+        border: 1px solid var(--glass-border);
+    }
+
+    .stats-row {
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        color: var(--text-dim);
+    }
+
+    .stats-val {
+        color: white;
+        font-weight: 600;
+    }
+
+    /* Custom File Input */
+    input[type="file"] {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="dashboard-header animate-fade">
+        <h2 class="fw-bold">Security Console</h2>
+        <p class="text-dim">Select a detection module to verify identity liveness.</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <!-- Image Detection -->
+        <div class="col-lg-4 animate-fade" style="animation-delay: 0.1s;">
+            <div class="glass-panel card-detection">
+                <div class="icon-box"><i class="fas fa-image"></i></div>
+                <h4 class="mb-3">Image Analysis</h4>
+                <p class="text-dim small mb-4">Detect print, screen, or replay attacks in static photos.</p>
+                
+                <form method="POST" enctype="multipart/form-data" id="imageForm">
+                    <input type="hidden" name="model_type" value="image">
+                    <label class="upload-zone w-100 text-center" for="imageFile">
+                        <i class="fas fa-cloud-upload-alt mb-2 d-block fs-3"></i>
+                        <span class="small" id="imageName">Click to upload photo</span>
+                        <input type="file" name="file" id="imageFile" accept="image/*" onchange="updateFileName('imageFile', 'imageName')" required>
+                    </label>
+                    <button type="submit" class="btn btn-premium w-100">Run Analysis</button>
+                </form>
+
+                {% if image_result %}
+                <div class="mt-4 pt-3 border-top border-secondary">
+                    {% if image_result.label|lower == 'real' %}
+                        <div class="result-badge badge-real"><i class="fas fa-check-circle me-1"></i> Genuine User</div>
+                    {% else %}
+                        <div class="result-badge badge-spoof"><i class="fas fa-exclamation-triangle me-1"></i> Spoof Detected</div>
+                    {% endif %}
+                    
+                    <div class="stats-row d-flex justify-content-between">
+                        <span>Confidence Score:</span>
+                        <span class="stats-val">{{ (image_result.confidence * 100)|round(2) }}%</span>
+                    </div>
+                    {% if image_result.file_url %}
+                        <img src="{{ image_result.file_url }}" class="preview-img">
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Video Detection -->
+        <div class="col-lg-4 animate-fade" style="animation-delay: 0.2s;">
+            <div class="glass-panel card-detection">
+                <div class="icon-box"><i class="fas fa-video"></i></div>
+                <h4 class="mb-3">Video Verification</h4>
+                <p class="text-dim small mb-4">Analyze temporal cues to identify complex deepfake intrusions.</p>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="model_type" value="video">
+                    <label class="upload-zone w-100 text-center" for="videoFile">
+                        <i class="fas fa-film mb-2 d-block fs-3"></i>
+                        <span class="small" id="videoName">Upload MP4/AVI clip</span>
+                        <input type="file" name="file" id="videoFile" accept="video/*" onchange="updateFileName('videoFile', 'videoName')" required>
+                    </label>
+                    <button type="submit" class="btn btn-premium w-100">Analyze Video</button>
+                </form>
+
+                {% if video_result %}
+                <div class="mt-4 pt-3 border-top border-secondary">
+                    {% if video_result.prediction|lower == 'real' %}
+                        <div class="result-badge badge-real"><i class="fas fa-check-circle me-1"></i> Genuine Stream</div>
+                    {% else %}
+                        <div class="result-badge badge-spoof"><i class="fas fa-exclamation-triangle me-1"></i> Video Spoof</div>
+                    {% endif %}
+                    
+                    {% if video_result.file_url %}
+                        <video class="preview-img" controls>
+                            <source src="{{ video_result.file_url }}" type="video/mp4">
+                        </video>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Webcam Detection -->
+        <div class="col-lg-4 animate-fade" style="animation-delay: 0.3s;">
+            <div class="glass-panel card-detection">
+                <div class="icon-box"><i class="fas fa-broadcast-tower"></i></div>
+                <h4 class="mb-3">Live Biometrics</h4>
+                <p class="text-dim small mb-4">Real-time edge detection for immediate access control.</p>
+                
+                <div class="upload-zone w-100 text-center" style="cursor: default;">
+                    <i class="fas fa-user-shield mb-2 d-block fs-1" style="color: var(--primary-glow)"></i>
+                    <p class="small text-dim">Active Monitoring Engine</p>
+                </div>
+                
+                <button onclick="startWebcam()" class="btn btn-premium w-100 mt-auto">Initialize Live Cam</button>
+                <p class="text-center text-dim x-small mt-3">Note: Local camera access required.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function updateFileName(inputId, spanId) {
+        const input = document.getElementById(inputId);
+        const span = document.getElementById(spanId);
+        if (input.files.length > 0) {
+            span.innerText = input.files[0].name;
+            span.style.color = "var(--primary-glow)";
+        }
+    }
+
+    function startWebcam() {
+        fetch('/start_webcam')
+            .then(response => response.text())
+            .then(message => {
+                // Using a premium custom alert would be better, but for now browser alert
+                alert(message);
+            })
+            .catch(error => alert("Initialization Error: " + error));
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: spoofguard-ai
+    env: docker
+    plan: free
+    region: oregon # or your preferred region
+    envVars:
+      - key: MONGO_URI
+        sync: false # User should provide this (e.g., MongoDB Atlas)
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PORT
+        value: 5001 # Render will use this but also inject its own
+    autoDeploy: true
+
+# Note: Render does not provide managed MongoDB. 
+# You should use MongoDB Atlas (https://www.mongodb.com/cloud/atlas)
+# and paste your connection string in the MONGO_URI environment variable on Render.

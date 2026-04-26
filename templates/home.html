@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}SpoofGuard | Secure Face Authentication{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section {
+        padding: 8rem 0 4rem;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 4.5rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        color: var(--text-dim);
+        max-width: 600px;
+        margin: 0 auto 2.5rem;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 5rem;
+    }
+
+    .feature-card {
+        padding: 2.5rem;
+        text-align: left;
+        transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary-glow);
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, var(--secondary-glow), var(--primary-glow));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .stats-section {
+        margin-top: 6rem;
+        padding: 4rem;
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--primary-glow);
+    }
+
+    .glowing-orb {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, var(--secondary-glow) 0%, transparent 70%);
+        opacity: 0.1;
+        z-index: -1;
+        filter: blur(60px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="glowing-orb" style="top: 10%; left: 10%;"></div>
+    <div class="glowing-orb" style="bottom: 20%; right: 10%;"></div>
+
+    <section class="hero-section animate-fade">
+        <h1 class="hero-title">
+            Secure Your Identity <br> with <span style="color: var(--primary-glow); -webkit-text-fill-color: var(--primary-glow);">Hybrid AI</span>
+        </h1>
+        <p class="hero-subtitle">
+            Next-generation face anti-spoofing system detecting DeepFakes, photo-attacks, and video replays in real-time.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ url_for('signup') }}" class="btn btn-premium btn-lg px-5">Start Protecting</a>
+            <a href="{{ url_for('about') }}" class="btn btn-outline-premium btn-lg px-5">Learn Methodology</a>
+        </div>
+    </section>
+
+    <div class="feature-grid container">
+        <div class="glass-panel feature-card animate-fade" style="animation-delay: 0.1s;">
+            <i class="fas fa-camera-retro feature-icon"></i>
+            <h3>Image Analysis</h3>
+            <p class="text-dim">Instant verification of static photos using high-frequency texture analysis to detect print and screen attacks.</p>
+        </div>
+        <div class="glass-panel feature-card animate-fade" style="animation-delay: 0.2s;">
+            <i class="fas fa-video feature-icon"></i>
+            <h3>Video Liveness</h3>
+            <p class="text-dim">Temporal analysis of video streams to ensure user presence and detect replay or deepfake intrusions.</p>
+        </div>
+        <div class="glass-panel feature-card animate-fade" style="animation-delay: 0.3s;">
+            <i class="fas fa-microchip feature-icon"></i>
+            <h3>Hybrid Engine</h3>
+            <p class="text-dim">Proprietary MobileNetV3 and ResNet architectures working in sync for maximum accuracy and speed.</p>
+        </div>
+    </div>
+
+    <section class="stats-section glass-panel animate-fade" style="margin-bottom: 5rem;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stat-number">99.8%</div>
+                <p>Detection Accuracy</p>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-number">< 50ms</div>
+                <p>Latency</p>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-number">24/7</div>
+                <p>Real-time Monitoring</p>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

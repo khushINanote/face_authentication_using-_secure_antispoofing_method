@@ -11,8 +11,8 @@ from sklearn.utils.class_weight import compute_class_weight
 
 # ---------------- CONFIG ----------------
 DATASET_DIR = "dataset"                    # must contain dataset/real and dataset/spoof
-MODEL_PATH = os.path.join("video_model", "models", "multi_class_model.h5")
-OUTPUT_PATH = os.path.join("video_model", "models", "multi_class_model_finetuned.h5")
+MODEL_PATH = os.path.join("video_model", "models", "video_classifier_fast.h5")
+OUTPUT_PATH = os.path.join("video_model", "models", "video_classifier_fast_finetuned.h5")
 
 IMG_SIZE = (224, 224)
 MAX_FRAMES_PER_VIDEO = 30    # how many frames to extract per video (max)

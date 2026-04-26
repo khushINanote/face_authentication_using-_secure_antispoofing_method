@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}About | SpoofGuard AI{% endblock %}
+
+{% block content %}
+<div class="container py-5 animate-fade">
+    <div class="glass-panel p-5">
+        <h2 class="hero-title mb-4" style="font-size: 3rem;">Our Methodology</h2>
+        <p class="text-dim fs-5">
+            SpoofGuard AI utilizes a sophisticated hybrid approach to face authentication. By combining temporal analysis of video streams with high-frequency spatial analysis of static images, we ensure that the person behind the camera is genuine.
+        </p>
+        <div class="row mt-5">
+            <div class="col-md-6 mb-4">
+                <h4 class="text-primary-glow" style="color: var(--primary-glow)">MobileNetV3 Backbone</h4>
+                <p class="text-dim">Our image analysis module leverages the MobileNetV3 architecture, optimized for high accuracy on edge devices without compromising on speed.</p>
+            </div>
+            <div class="col-md-6 mb-4">
+                <h4 class="text-primary-glow" style="color: var(--primary-glow)">ResNet Temporal Fusion</h4>
+                <p class="text-dim">For video and live streams, we use a temporal fusion network based on ResNet to detect micro-jitters and liveness indicators that are impossible for deepfakes to replicate.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
