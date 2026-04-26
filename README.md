@@ -240,26 +240,22 @@ mongod
 
 ---
 
-# **13. Deploying on Render**
+# **14. Deploying on Vercel**
 
-This project is optimized for [Render](https://render.com) using Docker.
+You can deploy the Flask interface on Vercel, but there are **significant limitations** due to the size of ML dependencies.
+
+> [!CAUTION]
+> **Size Limit Warning**: Vercel's Serverless Functions have a maximum size limit (250MB for Pro, less for Free). **TensorFlow alone exceeds this limit.** 
+> For the ML features to work on Vercel, you would need to use a lighter runtime like **ONNX** or host the ML logic as an external API (e.g., on Render) and use Vercel only for the frontend.
 
 ### **Steps to Deploy**
+1. Install the Vercel CLI: `npm i -g vercel`
+2. Run `vercel` in the project root.
+3. Vercel will use `vercel.json` and `app.py` to deploy as a Serverless Function.
 
-1. **Push this repository** to your GitHub/GitLab account.
-2. **Create a New Web Service** on Render.
-3. **Connect your repository**.
-4. **Environment Configuration**:
-   - Render will automatically detect the `Dockerfile`.
-   - Add the following **Environment Variables** in the Render dashboard:
-     - `MONGO_URI`: Your MongoDB Atlas connection string.
-     - `SECRET_KEY`: A random secure string.
-     - `PORT`: `5001` (Render will also provide this automatically).
-5. **Storage (Optional)**:
-   - If you want to keep uploaded files permanently, attach a **Persistent Disk** to `/app/static/uploads` in the Render settings (Requires a paid plan).
-
-### **Database Recommendation**
-Since Render doesn't host MongoDB, we recommend using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) (Free Tier available).
+### **Limitations**
+- **Webcam**: `cv2.imshow` will not work.
+- **File System**: Local uploads to `static/uploads` are not persistent. Use AWS S3 or Cloudinary.
 
 ---
 
