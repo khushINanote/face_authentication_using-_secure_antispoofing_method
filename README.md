@@ -240,26 +240,7 @@ mongod
 
 ---
 
-# **14. Deploying on Vercel**
 
-You can deploy the Flask interface on Vercel, but there are **significant limitations** due to the size of ML dependencies.
-
-> [!CAUTION]
-> **Size Limit Warning**: Vercel's Serverless Functions have a maximum size limit (250MB for Pro, less for Free). **TensorFlow alone exceeds this limit.** 
-> For the ML features to work on Vercel, you would need to use a lighter runtime like **ONNX** or host the ML logic as an external API (e.g., on Render) and use Vercel only for the frontend.
-
-### **Steps to Deploy**
-1. Install the Vercel CLI: `npm i -g vercel`
-2. Run `vercel` in the project root.
-3. Vercel will use `vercel.json` and `app.py` to deploy as a Serverless Function.
-
-### **Limitations**
-- **Webcam**: `cv2.imshow` will not work.
-- **File System**: Local uploads to `static/uploads` are not persistent. Use AWS S3 or Cloudinary.
-
----
-
----
 
 
 
